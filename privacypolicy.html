@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - BarTab</title>
+    <link rel="shortcut icon" type="image/x-icon" href="static/favicon.png">
+    <meta name="apple-itunes-app" content="app-id=1602993704">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:image" content="static/website-og-image.png">
+    <meta property="og:title" content="Privacy Policy - BarTab">
+    <meta property="og:description" content="Privacy Policy for BarTab - The easy way to manage running tabs.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Privacy Policy - BarTab">
+    <meta name="twitter:description" content="Privacy Policy for BarTab - The easy way to manage running tabs.">
+    <meta name="twitter:image" content="static/website-twitter-card.png">
+    <link rel="stylesheet" href="static/main.css">
+</head>
+<body onload="showAppStoreButtonOrNot()">
+    <section class="navbar-container navbar-fixed-top">
+        <div class="d-flex">
+            <div class="logo">
+                <picture>
+                    <img src="static/logo_yellow.png" alt="BarTab logotype" class="navbar-logo">
+                </picture>
+            </div>
+            <nav class="navbar">
+                <ul class="nav">
+                    <li><a href="https://apps.apple.com/us/app/bartab/id1602993704">Get it now</a></li>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+                <div class="hamburger-menu">
+                    <input type="checkbox" id="toggle">
+                    <label for="toggle">
+                        <div class="hamburger-menu-icon">
+                            <div></div>
+                        </div>
+                    </label>
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="https://apps.apple.com/us/app/bartab/id1602993704">DOWNLOAD</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <div class="wrapper">
+        <main>
+            <h2 class="header-subtitle">Privacy Policy</h2>
+            
+            <div class="textbody">
+                <p>At BarTab, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by BarTab and how we use it.</p>
+
+                <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
+
+                <h3>Privacy Policies</h3>
+
+                <p>You may consult this list to find the Privacy Policy for each of the advertising partners of BarTab.</p>
+
+                <p>Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Beacons that are used in their respective advertisements and links that appear on BarTab. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on this app or other apps or websites.</p>
+
+                <p>Note that BarTab has no access to or control over these cookies that are used by third-party advertisers.</p>
+
+                <h3>Third Party Privacy Policies</h3>
+
+                <p>BarTab's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options.</p>
+
+                <h3>Children's Information</h3>
+
+                <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
+
+                <p>BarTab does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our App, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
+
+                <h3>Online Privacy Policy Only</h3>
+
+                <p>This Privacy Policy applies only to our online activities and is valid for visitors to our App with regards to the information that they shared and/or collect in BarTab. This policy is not applicable to any information collected offline or via channels other than this app.</p>
+
+                <h3>Consent</h3>
+
+                <p>By using our app, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
+            </div>
+
+            <a href="https://apps.apple.com/us/app/bartab/id1602993704" class="appstore-button" id="appstore">
+                <img src="static/appstore.png" alt="Download on App Store">
+            </a>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <p class="agreements">
+                <a href="termsandconditions.html" tabindex="1">Terms & Conditions</a>
+                <a href="privacypolicy.html" tabindex="2">Privacy Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function showAppStoreButtonOrNot() {
+            if (['iPad Simulator',
+                'iPhone Simulator',
+                'iPod Simulator',
+                'iPad',
+                'iPhone',
+                'iPod'
+                ].includes(navigator.platform)) {
+                document.getElementById("appstore").style.display = "block";
+            } else {
+                document.getElementById("appstore").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
