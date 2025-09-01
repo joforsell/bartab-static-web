@@ -27,7 +27,7 @@ header {
     padding-top: 1em;
     margin-left: auto;
     margin-right: auto;
-    padding: 200px 20px;
+    padding: 20px 20px;
     background-image: linear-gradient(to bottom, var(--app-blue), var(--sec-app-blue));
 }
 
