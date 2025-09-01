@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Updated - BarTab</title>
+    <title>Welcome to BarTab!</title>
     <link rel="shortcut icon" type="image/x-icon" href="static/favicon.png">
     <meta name="apple-itunes-app" content="app-id=1602993704">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:image" content="static/website-og-image.png">
-    <meta property="og:title" content="Password Updated - BarTab">
-    <meta property="og:description" content="Your password has been successfully updated.">
+    <meta property="og:title" content="Welcome to BarTab!">
+    <meta property="og:description" content="Your account has been successfully created. Welcome to BarTab!">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Password Updated - BarTab">
-    <meta name="twitter:description" content="Your password has been successfully updated.">
+    <meta name="twitter:title" content="Welcome to BarTab!">
+    <meta name="twitter:description" content="Your account has been successfully created. Welcome to BarTab!">
     <meta name="twitter:image" content="static/website-twitter-card.png">
     <link rel="stylesheet" href="static/main.css">
     <style>
@@ -27,7 +27,7 @@
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             margin: 0 auto;
             text-align: center;
         }
@@ -53,29 +53,56 @@
         .success-container h1 {
             color: #333;
             margin-bottom: 15px;
-            font-size: 28px;
+            font-size: 32px;
         }
         
         .success-container p {
             color: #666;
-            margin-bottom: 30px;
-            line-height: 1.5;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .success-container .highlight {
+            color: #00509d;
+            font-weight: 600;
         }
         
         .btn-primary {
             background: #00509d;
             color: white;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border: none;
             border-radius: 8px;
             text-decoration: none;
             display: inline-block;
             font-weight: 500;
+            font-size: 16px;
+            margin: 10px;
             transition: background-color 0.3s ease;
         }
         
         .btn-primary:hover {
             background: #003d7a;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #00509d;
+            padding: 14px 28px;
+            border: 2px solid #00509d;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+            font-size: 16px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #00509d;
+            color: white;
         }
         
         .logo-container {
@@ -91,9 +118,41 @@
             display: block;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
+        
+        .features-list {
+            text-align: left;
+            margin: 30px 0;
+        }
+        
+        .features-list h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .features-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .features-list li {
+            color: #666;
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .features-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-weight: bold;
+        }
     </style>
 </head>
-<body>
+<body onload="showAppStoreButtonOrNot()">
     <section class="navbar-container navbar-fixed-top">
         <div class="d-flex">
             <div class="logo">
@@ -127,9 +186,9 @@
             <div class="success-container">
                 <div class="success-icon"></div>
                 
-                <h1>Password updated!</h1>
+                <h1>Welcome to BarTab!</h1>
                 
-                <p>Your password has been successfully updated. You can now use your new password to sign in to the Bartab app.</p>
+                <p>Your account has been successfully created. You're now ready to start managing your bar tabs with ease!</p>
             </div>
         </main>
     </div>
@@ -142,5 +201,25 @@
             </p>
         </div>
     </footer>
+
+    <a href="https://apps.apple.com/us/app/bartab/id1602993704" class="appstore-button" id="appstore">
+        <img src="static/appstore.png" alt="Download on App Store">
+    </a>
+
+    <script>
+        function showAppStoreButtonOrNot() {
+            if (['iPad Simulator',
+                'iPhone Simulator',
+                'iPod Simulator',
+                'iPad',
+                'iPhone',
+                'iPod'
+                ].includes(navigator.platform)) {
+                document.getElementById("appstore").style.display = "block";
+            } else {
+                document.getElementById("appstore").style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
