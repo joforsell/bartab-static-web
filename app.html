@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Bartab - The easy way to manage running tabs</title>
+    <link rel="shortcut icon" type="image/x-icon" href="static/favicon.png">
+    <meta name="apple-itunes-app" content="app-id=1602993704">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:image" content="static/website-og-image.png">
+    <meta property="og:title" content="Download Bartab App">
+    <meta property="og:description" content="Download Bartab - The easy way to manage running tabs. Available on the App Store.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Download Bartab App">
+    <meta name="twitter:description" content="Download Bartab - The easy way to manage running tabs. Available on the App Store.">
+    <meta name="twitter:image" content="static/website-twitter-card.png">
+    <link rel="stylesheet" href="static/main.css">
+    <style>
+        .app-container {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .app-icon-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            margin: 0 auto 30px;
+            display: block;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .app-container h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 36px;
+            font-weight: 700;
+        }
+        
+        .app-container p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        
+        .app-container .tagline {
+            color: #00509d;
+            font-weight: 600;
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .download-button {
+            display: inline-block;
+            margin: 15px 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .download-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .download-button img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .coming-soon {
+            color: #999;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 20px;
+        }
+        
+        .back-link {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .back-link a {
+            color: #00509d;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 30px 20px;
+                max-width: 90%;
+            }
+            
+            .app-container h1 {
+                font-size: 28px;
+            }
+            
+            .app-container p {
+                font-size: 16px;
+            }
+            
+            .download-button img {
+                width: 180px;
+            }
+        }
+    </style>
+</head>
+<body onload="showAppStoreButtonOrNot()">
+    <section class="navbar-container navbar-fixed-top">
+        <div class="d-flex">
+            <div class="logo">
+                <picture>
+                    <img src="static/logo_yellow.png" alt="BarTab logotype" class="navbar-logo">
+                </picture>
+            </div>
+            <nav class="navbar">
+                <ul class="nav">
+                    <li class="active"><a href="app.html">Get it now</a></li>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+                <div class="hamburger-menu">
+                    <input type="checkbox" id="toggle">
+                    <label for="toggle">
+                        <div class="hamburger-menu-icon">
+                            <div></div>
+                        </div>
+                    </label>
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="app.html">DOWNLOAD</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </section>
+    
+    <div class="wrapper">
+        <main style="min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px;">
+            <div class="app-container">
+                <img src="https://iduprmuzmivyibgqrfle.supabase.co/storage/v1/object/public/assets/icon-512x512.png" alt="Bartab App" class="app-icon-large">
+                
+                <h1>Download Bartab</h1>
+                
+                <p class="tagline">The easy way to manage running tabs</p>
+                
+                <p>Transform your bar management with our intuitive app. Track customer tabs, manage transactions, and streamline your business operations.</p>
+                
+                <div class="download-links">
+                    <a href="https://apps.apple.com/us/app/bartab/id1602993704" class="download-button">
+                        <img src="static/appstore.png" alt="Download on the App Store">
+                    </a>
+                    
+                    <div class="coming-soon">
+                        Android version coming soon
+                    </div>
+                </div>
+                
+                <div class="back-link">
+                    <a href="index.html">← Learn more about Bartab</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <p class="agreements">
+                <a href="termsandconditions.html" tabindex="1">Terms & Conditions</a>
+                <a href="privacypolicy.html" tabindex="2">Privacy Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <a href="https://apps.apple.com/us/app/bartab/id1602993704" class="appstore-button" id="appstore">
+        <img width="150" src="static/appstore.png" alt="Download on App Store">
+    </a>
+
+    <script>
+        function showAppStoreButtonOrNot() {
+            if (['iPad Simulator',
+                'iPhone Simulator',
+                'iPod Simulator',
+                'iPad',
+                'iPhone',
+                'iPod'
+                ].includes(navigator.platform)) {
+                document.getElementById("appstore").style.display = "block";
+            } else {
+                document.getElementById("appstore").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
