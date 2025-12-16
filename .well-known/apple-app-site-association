@@ -4,7 +4,8 @@
             {
                 "paths": [
                     "/app",
-                    "/app/*"
+                    "/app/*",
+                    "/dummy"
                 ],
                 "appID": "5PNV6G957X.com.joforsell.BarTab"
             }
