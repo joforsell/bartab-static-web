@@ -6,9 +6,12 @@
                     "/app",
                     "/app/*"
                 ],
-                "appID": "1602993704.com.joforsell.BarTab"
+                "appID": "5PNV6G957X.com.joforsell.BarTab"
             }
         ],
         "apps": []
-    }
+    },
+    "webcredentials": {
+      "apps": [ "5PNV6G957X.com.joforsell.BarTab" ]
+   }
 }
