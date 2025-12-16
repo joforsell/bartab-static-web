@@ -2,12 +2,17 @@
     "applinks": {
         "details": [
             {
-                "paths": [
-                    "/app",
-                    "/app/*",
-                    "/dummy"
-                ],
-                "appID": "5PNV6G957X.com.joforsell.BarTab"
+                "appIDs": [ "5PNV6G957X.com.joforsell.BarTab" ],
+                "components": [
+               {
+                  "/": "/app",
+                  "comment": "Matches any URL with a path that starts with /app."
+               },
+               {
+                  "/": "/app/*",
+                  "comment": "Matches any URL with a path that starts with /app/ and any subpath."
+               }
+             ]
             }
         ],
         "apps": []
