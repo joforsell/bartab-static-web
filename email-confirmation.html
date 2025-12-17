@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to BarTab!</title>
+    <title>Email Confirmation - BarTab</title>
     <link rel="shortcut icon" type="image/x-icon" href="static/favicon.png">
     <meta name="apple-itunes-app" content="app-id=1602993704">
     
@@ -48,6 +48,28 @@
             color: white;
             font-size: 40px;
             font-weight: bold;
+        }
+        
+        .error-icon {
+            width: 80px;
+            height: 80px;
+            background: #e53e3e;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .error-icon::before {
+            content: "✕";
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        
+        .hidden {
+            display: none;
         }
         
         .success-container h1 {
@@ -183,12 +205,24 @@
     
     <div class="wrapper">
         <main style="min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px;">
-            <div class="success-container">
+            <!-- Success state -->
+            <div class="success-container hidden" id="success-view">
                 <div class="success-icon"></div>
                 
                 <h1>Email confirmed!</h1>
                 
                 <p>Your email has been successfully verified. You can now sign in to your Bartab account.</p>
+                
+                <a href="https://open.bartab.info/app" class="btn-primary">Open Bartab</a>
+            </div>
+            
+            <!-- Error state -->
+            <div class="success-container hidden" id="error-view">
+                <div class="error-icon"></div>
+                
+                <h1>Link expired</h1>
+                
+                <p>This confirmation link has expired. Please request a new confirmation email from the app.</p>
                 
                 <a href="https://open.bartab.info/app" class="btn-primary">Open Bartab</a>
             </div>
@@ -222,6 +256,20 @@
                 document.getElementById("appstore").style.display = "none";
             }
         }
+        
+        function handleEmailConfirmation() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const errorCode = urlParams.get('error_code');
+            
+            if (errorCode === 'otp_expired') {
+                document.getElementById('error-view').classList.remove('hidden');
+            } else {
+                document.getElementById('success-view').classList.remove('hidden');
+            }
+        }
+        
+        // Run on page load
+        handleEmailConfirmation();
     </script>
 </body>
 </html>
