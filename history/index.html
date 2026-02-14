@@ -31,7 +31,7 @@
         <section class="history">
             <div class="container">
                 <div class="history__header">
-                    <h1>Transaction History</h1>
+                    <h1>Transaction history</h1>
                     <p>Your purchases and balance changes</p>
                 </div>
 
@@ -111,11 +111,6 @@
             'openingBalance': 'addedBalance.svg'
         };
 
-        // SVG icons for inline use
-        const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-        </svg>`;
-
         function getIconPath(imageName, type) {
             if (type === 'add') {
                 return '../static/addedBalance.svg';
@@ -147,16 +142,20 @@
             return date.toLocaleDateString('en-US', options);
         }
 
-        function formatAmount(amount) {
-            const prefix = amount >= 0 ? '+' : '';
-            return `${prefix}$${Math.abs(amount).toFixed(2)}`;
+        function formatAmount(amount, currency) {
+            const prefix = amount > 0 ? '+' : amount < 0 ? '−' : '';
+            const formatted = new Intl.NumberFormat(navigator.language, {
+                style: 'currency',
+                currency: currency
+            }).format(Math.abs(amount));
+            return `${prefix}${formatted}`;
         }
 
         function calculateBalance(transactions) {
             return transactions.reduce((sum, t) => sum + t.amount, 0);
         }
 
-        function renderTransactions(transactions) {
+        function renderTransactions(transactions, currency) {
             const content = document.getElementById('content');
 
             if (!transactions || transactions.length === 0) {
@@ -174,30 +173,42 @@
                 return;
             }
 
-            const sortedTransactions = [...transactions].sort((a, b) => {
-                if (a.index !== undefined && b.index !== undefined) {
-                    return b.index - a.index;
-                }
-                return new Date(b.date) - new Date(a.date);
-            });
+            // Transactions are already sorted by the backend
 
             const balance = calculateBalance(transactions);
             const balanceClass = balance >= 0 ? 'summary-card__balance--positive' : 'summary-card__balance--negative';
 
+            const formattedBalance = new Intl.NumberFormat(navigator.language, {
+                style: 'currency',
+                currency: currency
+            }).format(Math.abs(balance));
+
             let html = `
                 <div class="summary-card">
                     <div class="summary-card__label">Current Balance</div>
-                    <div class="summary-card__balance ${balanceClass}">$${Math.abs(balance).toFixed(2)}</div>
+                    <div class="summary-card__balance ${balanceClass}">${formattedBalance}</div>
                     <div class="summary-card__count">${transactions.length} transaction${transactions.length !== 1 ? 's' : ''}</div>
                 </div>
                 <div class="transaction-list">
             `;
 
-            for (const transaction of sortedTransactions) {
+            // Calculate running balance (transactions are newest first)
+            let runningBalance = balance;
+
+            for (const transaction of transactions) {
                 const isResolved = transaction.resolvedBy && transaction.resolvedBy.id;
                 const iconPath = getIconPath(transaction.imageName, transaction.type);
-                const amountClass = transaction.amount >= 0 ? 'transaction-item__amount--positive' : 'transaction-item__amount--negative';
                 const resolvedClass = isResolved ? 'transaction-item--resolved' : '';
+                
+                const balanceAfter = runningBalance;
+                runningBalance -= transaction.amount; // Move backwards to previous balance
+                
+                // Use 0 instead of -0 to avoid showing minus sign for zero
+                const balanceValue = Math.abs(balanceAfter) < 0.001 ? 0 : balanceAfter;
+                const formattedRunningBalance = new Intl.NumberFormat(navigator.language, {
+                    style: 'currency',
+                    currency: currency
+                }).format(balanceValue);
 
                 html += `
                     <div class="transaction-item ${resolvedClass}">
@@ -209,9 +220,9 @@
                             ${transaction.note ? `<div class="transaction-item__note">${escapeHtml(transaction.note)}</div>` : ''}
                         </div>
                         <div class="transaction-item__meta">
-                            <div class="transaction-item__amount ${amountClass}">${formatAmount(transaction.amount)}</div>
+                            <div class="transaction-item__amount">${formatAmount(transaction.amount, currency)}</div>
+                            <div class="transaction-item__running-balance">${formattedRunningBalance}</div>
                             <div class="transaction-item__date">${formatDate(transaction.date)}</div>
-                            ${isResolved ? `<div class="transaction-item__badge">${checkIcon} Settled</div>` : ''}
                         </div>
                     </div>
                 `;
@@ -268,8 +279,10 @@
                     return;
                 }
 
-                const transactions = await response.json();
-                renderTransactions(transactions);
+                const data = await response.json();
+                const transactions = data.transactions || data;
+                const currency = data.currency || 'USD';
+                renderTransactions(transactions, currency);
             } catch (error) {
                 console.error('Error loading transactions:', error);
                 renderError('Unable to connect to the server. Please check your internet connection and try again.');

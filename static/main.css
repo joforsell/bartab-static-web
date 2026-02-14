@@ -602,11 +602,11 @@ main {
 }
 
 .summary-card__balance--positive {
-    color: var(--color-success);
+    color: var(--color-text);
 }
 
 .summary-card__balance--negative {
-    color: var(--color-error);
+    color: var(--color-text);
 }
 
 .summary-card__count {
@@ -638,12 +638,13 @@ main {
 }
 
 .transaction-item--resolved {
-    opacity: 0.6;
-    border-left: 3px solid var(--color-success);
+    opacity: 0.5;
 }
 
-.transaction-item:not(.transaction-item--resolved) {
-    border-left: 3px solid var(--color-accent);
+.transaction-item--resolved .transaction-item__name,
+.transaction-item--resolved .transaction-item__amount,
+.transaction-item--resolved .transaction-item__date {
+    color: var(--color-text-muted);
 }
 
 .transaction-item__icon {
@@ -658,22 +659,22 @@ main {
     object-fit: contain;
 }
 
-/* Icon colors in light mode */
+/* Icon colors - Bartab yellow for active, gray for resolved */
 .transaction-item__icon img {
-    filter: brightness(0) saturate(100%) invert(45%) sepia(98%) saturate(1000%) hue-rotate(360deg) brightness(95%) contrast(95%);
+    filter: brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1029%) hue-rotate(357deg) brightness(101%) contrast(97%);
 }
 
 .transaction-item--resolved .transaction-item__icon img {
-    filter: brightness(0) saturate(100%) invert(40%) sepia(50%) saturate(500%) hue-rotate(100deg) brightness(90%) contrast(90%);
+    filter: brightness(0) saturate(100%) invert(50%) sepia(0%) saturate(0%) brightness(90%);
 }
 
 @media (prefers-color-scheme: dark) {
     .transaction-item__icon img {
-        filter: brightness(0) saturate(100%) invert(70%) sepia(60%) saturate(700%) hue-rotate(340deg) brightness(100%) contrast(95%);
+        filter: brightness(0) saturate(100%) invert(77%) sepia(53%) saturate(1000%) hue-rotate(357deg) brightness(103%) contrast(97%);
     }
     
     .transaction-item--resolved .transaction-item__icon img {
-        filter: brightness(0) saturate(100%) invert(75%) sepia(40%) saturate(500%) hue-rotate(90deg) brightness(95%) contrast(90%);
+        filter: brightness(0) saturate(100%) invert(60%) sepia(0%) saturate(0%) brightness(100%);
     }
 }
 
@@ -707,14 +708,13 @@ main {
 .transaction-item__amount {
     font-weight: 600;
     font-size: 1rem;
+    color: var(--color-text);
 }
 
-.transaction-item__amount--positive {
-    color: var(--color-success);
-}
-
-.transaction-item__amount--negative {
-    color: var(--color-error);
+.transaction-item__running-balance {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-top: 2px;
 }
 
 .transaction-item__date {
@@ -723,22 +723,6 @@ main {
     margin-top: 2px;
 }
 
-.transaction-item__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.6875rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    color: var(--color-success);
-    margin-top: 4px;
-}
-
-.transaction-item__badge svg {
-    width: 12px;
-    height: 12px;
-}
 
 /* Loading State */
 .loading {
