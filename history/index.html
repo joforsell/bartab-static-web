@@ -3,322 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction History - BarTab</title>
+    <title>Transaction History - Bartab</title>
+    <meta name="description" content="View your Bartab transaction history.">
     <link rel="shortcut icon" type="image/x-icon" href="../static/favicon.png">
     <meta name="apple-itunes-app" content="app-id=1602993704">
     <link rel="stylesheet" href="../static/main.css">
-    <style>
-        .history-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2em 1em;
-        }
-
-        .history-header {
-            text-align: center;
-            margin-bottom: 2em;
-        }
-
-        .history-header h1 {
-            font-family: 'Abril Fatface', serif;
-            font-size: 2.5rem;
-            margin-bottom: 0.5em;
-        }
-
-        .history-header p {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .transaction-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .transaction-item {
-            display: flex;
-            align-items: center;
-            background-color: var(--app-blue);
-            border-radius: 8px;
-            padding: 1em 1.2em;
-            position: relative;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .transaction-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .transaction-item.resolved {
-            opacity: 0.6;
-        }
-
-        .transaction-item.resolved::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background-color: #4CAF50;
-            border-radius: 8px 0 0 8px;
-        }
-
-        .transaction-item:not(.resolved)::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background-color: var(--app-yellow);
-            border-radius: 8px 0 0 8px;
-        }
-
-        .transaction-icon {
-            width: 40px;
-            height: 40px;
-            margin-right: 1em;
-            flex-shrink: 0;
-        }
-
-        .transaction-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: invert(61%) sepia(98%) saturate(1137%) hue-rotate(352deg) brightness(103%) contrast(98%);
-        }
-
-        .transaction-item.resolved .transaction-icon img {
-            filter: invert(65%) sepia(52%) saturate(405%) hue-rotate(73deg) brightness(92%) contrast(87%);
-        }
-
-        .transaction-details {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .transaction-name {
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 0.2em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .transaction-note {
-            font-size: 0.85em;
-            color: rgba(255, 255, 255, 0.6);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .transaction-meta {
-            text-align: right;
-            flex-shrink: 0;
-            margin-left: 1em;
-        }
-
-        .transaction-amount {
-            font-size: 1.2em;
-            font-weight: 700;
-        }
-
-        .transaction-amount.positive {
-            color: #4CAF50;
-        }
-
-        .transaction-amount.negative {
-            color: #f44336;
-        }
-
-        .transaction-date {
-            font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 0.2em;
-        }
-
-        .resolved-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 0.7em;
-            padding: 2px 8px;
-            border-radius: 12px;
-            margin-top: 4px;
-        }
-
-        .resolved-badge svg {
-            width: 12px;
-            height: 12px;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 4em 2em;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            border-top-color: var(--app-yellow);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1em;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .error {
-            text-align: center;
-            padding: 4em 2em;
-        }
-
-        .error-icon {
-            font-size: 4em;
-            margin-bottom: 0.5em;
-        }
-
-        .error h2 {
-            text-align: center;
-            color: #f44336;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 4em 2em;
-        }
-
-        .empty-state img {
-            width: 100px;
-            height: 100px;
-            opacity: 0.5;
-            margin-bottom: 1em;
-        }
-
-        .summary-card {
-            background: linear-gradient(135deg, var(--app-blue), var(--sec-app-blue));
-            border-radius: 12px;
-            padding: 1.5em;
-            margin-bottom: 2em;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .summary-label {
-            font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 0.5em;
-        }
-
-        .summary-balance {
-            font-size: 2.5em;
-            font-weight: 700;
-            font-family: 'Abril Fatface', serif;
-        }
-
-        .summary-balance.positive {
-            color: #4CAF50;
-        }
-
-        .summary-balance.negative {
-            color: #f44336;
-        }
-
-        .summary-transactions {
-            font-size: 0.85em;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 0.5em;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .history-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .transaction-item {
-                padding: 0.8em 1em;
-            }
-
-            .transaction-icon {
-                width: 32px;
-                height: 32px;
-            }
-
-            .transaction-name {
-                font-size: 1em;
-            }
-
-            .transaction-amount {
-                font-size: 1em;
-            }
-        }
-    </style>
 </head>
 <body>
-    <section class="navbar-container navbar-fixed-top">
-        <div class="d-flex">
-            <div class="logo">
-                <picture>
-                    <img src="../static/logo_yellow.png" alt="BarTab logotype" class="navbar-logo">
-                </picture>
-            </div>
-            <nav class="navbar">
-                <ul class="nav">
-                    <li><a href="../app.html">Get it now</a></li>
-                    <li><a href="../index.html">Home</a></li>
-                </ul>
-                <div class="hamburger-menu">
-                    <input type="checkbox" id="toggle">
-                    <label for="toggle">
-                        <div class="hamburger-menu-icon">
-                            <div></div>
-                        </div>
-                    </label>
-                    <ul>
-                        <li><a href="../index.html">HOME</a></li>
-                        <li><a href="../app.html">DOWNLOAD</a></li>
-                    </ul>
+    <header class="header">
+        <nav class="nav">
+            <a href="../index.html" class="nav__logo">Bartab</a>
+            <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <ul class="nav__links">
+                <li><a href="../index.html" class="nav__link">Home</a></li>
+                <li><a href="../app.html" class="nav__link">Download</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="history">
+            <div class="container">
+                <div class="history__header">
+                    <h1>Transaction History</h1>
+                    <p>Your purchases and balance changes</p>
                 </div>
-            </nav>
-        </div>
-    </section>
 
-    <div class="wrapper">
-        <main class="history-container">
-            <div class="history-header">
-                <h1>Transaction History</h1>
-                <p>Your complete purchase and balance history</p>
-            </div>
-
-            <div id="content">
-                <div class="loading">
-                    <div class="loading-spinner"></div>
-                    <p>Loading transactions...</p>
+                <div id="content">
+                    <div class="loading">
+                        <div class="loading__spinner"></div>
+                        <p>Loading transactions...</p>
+                    </div>
                 </div>
             </div>
-        </main>
-    </div>
+        </section>
+    </main>
     
-    <footer>
-        <div class="footer-container">
-            <p class="agreements">
-                <a href="../termsandconditions.html" tabindex="1">Terms & Conditions</a>
-                <a href="../privacypolicy.html" tabindex="2">Privacy Policy</a>
-            </p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__links">
+                <a href="../termsandconditions.html" class="footer__link">Terms & Conditions</a>
+                <a href="../privacypolicy.html" class="footer__link">Privacy Policy</a>
+            </div>
         </div>
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const toggle = document.querySelector('.nav__toggle');
+        const navLinks = document.querySelector('.nav__links');
+        
+        toggle.addEventListener('click', () => {
+            const expanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', !expanded);
+            navLinks.classList.toggle('active');
+        });
+
         // Icon mapping for imageName to SVG files
         const iconMap = {
             // Drinks
@@ -362,10 +108,7 @@
             // Balance operations
             'addedBalance': 'addedBalance.svg',
             'removedBalance': 'removedBalance.svg',
-            'openingBalance': 'addedBalance.svg',
-            // Generic
-            'payments': 'payments.svg',
-            'person': 'person.svg'
+            'openingBalance': 'addedBalance.svg'
         };
 
         // SVG icons for inline use
@@ -373,13 +116,7 @@
             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
         </svg>`;
 
-        const resolveIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-        </svg>`;
-
         function getIconPath(imageName, type) {
-            // Handle different transaction types
             if (type === 'add') {
                 return '../static/addedBalance.svg';
             }
@@ -390,13 +127,11 @@
                 return '../static/resolve.svg';
             }
 
-            // Look up the icon in the map
             const iconFile = iconMap[imageName];
             if (iconFile) {
                 return `../static/${iconFile}`;
             }
 
-            // Fallback to drink icon
             return '../static/drink.svg';
         }
 
@@ -427,15 +162,18 @@
             if (!transactions || transactions.length === 0) {
                 content.innerHTML = `
                     <div class="empty-state">
-                        <img src="../static/payments.svg" alt="No transactions">
-                        <h2>No transactions found</h2>
-                        <p>Your transaction history will appear here once you make purchases.</p>
+                        <div class="empty-state__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                            </svg>
+                        </div>
+                        <h2>No transactions yet</h2>
+                        <p>Your transaction history will appear here.</p>
                     </div>
                 `;
                 return;
             }
 
-            // Sort transactions by date (newest first) or by index
             const sortedTransactions = [...transactions].sort((a, b) => {
                 if (a.index !== undefined && b.index !== undefined) {
                     return b.index - a.index;
@@ -443,15 +181,14 @@
                 return new Date(b.date) - new Date(a.date);
             });
 
-            // Calculate current balance
             const balance = calculateBalance(transactions);
-            const balanceClass = balance >= 0 ? 'positive' : 'negative';
+            const balanceClass = balance >= 0 ? 'summary-card__balance--positive' : 'summary-card__balance--negative';
 
             let html = `
                 <div class="summary-card">
-                    <div class="summary-label">Current Balance</div>
-                    <div class="summary-balance ${balanceClass}">$${Math.abs(balance).toFixed(2)}</div>
-                    <div class="summary-transactions">${transactions.length} transaction${transactions.length !== 1 ? 's' : ''}</div>
+                    <div class="summary-card__label">Current Balance</div>
+                    <div class="summary-card__balance ${balanceClass}">$${Math.abs(balance).toFixed(2)}</div>
+                    <div class="summary-card__count">${transactions.length} transaction${transactions.length !== 1 ? 's' : ''}</div>
                 </div>
                 <div class="transaction-list">
             `;
@@ -459,21 +196,22 @@
             for (const transaction of sortedTransactions) {
                 const isResolved = transaction.resolvedBy && transaction.resolvedBy.id;
                 const iconPath = getIconPath(transaction.imageName, transaction.type);
-                const amountClass = transaction.amount >= 0 ? 'positive' : 'negative';
+                const amountClass = transaction.amount >= 0 ? 'transaction-item__amount--positive' : 'transaction-item__amount--negative';
+                const resolvedClass = isResolved ? 'transaction-item--resolved' : '';
 
                 html += `
-                    <div class="transaction-item ${isResolved ? 'resolved' : ''}">
-                        <div class="transaction-icon">
-                            <img src="${iconPath}" alt="${transaction.itemName}" onerror="this.src='../static/drink.svg'">
+                    <div class="transaction-item ${resolvedClass}">
+                        <div class="transaction-item__icon">
+                            <img src="${iconPath}" alt="${escapeHtml(transaction.itemName)}" onerror="this.src='../static/drink.svg'">
                         </div>
-                        <div class="transaction-details">
-                            <div class="transaction-name">${escapeHtml(transaction.itemName)}</div>
-                            ${transaction.note ? `<div class="transaction-note">${escapeHtml(transaction.note)}</div>` : ''}
+                        <div class="transaction-item__details">
+                            <div class="transaction-item__name">${escapeHtml(transaction.itemName)}</div>
+                            ${transaction.note ? `<div class="transaction-item__note">${escapeHtml(transaction.note)}</div>` : ''}
                         </div>
-                        <div class="transaction-meta">
-                            <div class="transaction-amount ${amountClass}">${formatAmount(transaction.amount)}</div>
-                            <div class="transaction-date">${formatDate(transaction.date)}</div>
-                            ${isResolved ? `<div class="resolved-badge">${checkIcon} Settled</div>` : ''}
+                        <div class="transaction-item__meta">
+                            <div class="transaction-item__amount ${amountClass}">${formatAmount(transaction.amount)}</div>
+                            <div class="transaction-item__date">${formatDate(transaction.date)}</div>
+                            ${isResolved ? `<div class="transaction-item__badge">${checkIcon} Settled</div>` : ''}
                         </div>
                     </div>
                 `;
@@ -487,7 +225,7 @@
             const content = document.getElementById('content');
             content.innerHTML = `
                 <div class="error">
-                    <div class="error-icon">⚠️</div>
+                    <div class="error__icon">⚠</div>
                     <h2>Unable to load transactions</h2>
                     <p>${escapeHtml(message)}</p>
                 </div>
@@ -502,7 +240,6 @@
         }
 
         function getApiBaseUrl() {
-            // Use localhost API when running locally, production API otherwise
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
                 return 'http://localhost:8080';
             }
@@ -539,7 +276,6 @@
             }
         }
 
-        // Load transactions when the page loads
         document.addEventListener('DOMContentLoaded', loadTransactions);
     </script>
 </body>
