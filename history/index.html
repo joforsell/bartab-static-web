@@ -169,7 +169,7 @@
             return transactions.reduce((sum, t) => sum + t.amount, 0);
         }
 
-        function renderTransactions(transactions, currency) {
+        function renderTransactions(transactions, currency, isDemo) {
             const content = document.getElementById('content');
 
             if (!transactions || transactions.length === 0) {
@@ -197,7 +197,15 @@
                 currency: currency
             }).format(Math.abs(balance));
 
+            const demoBanner = isDemo ? `
+                <div class="demo-banner" role="status" aria-live="polite">
+                    <span class="demo-banner__label">Demo</span>
+                    <span class="demo-banner__text">You're viewing sample transaction history. Use a link from the app to see your real data.</span>
+                </div>
+            ` : '';
+
             let html = `
+                ${demoBanner}
                 <div class="summary-card">
                     <div class="summary-card__label">Current Balance</div>
                     <div class="summary-card__balance ${balanceClass}">${formattedBalance}</div>
@@ -271,12 +279,31 @@
             return 'https://api.bartab.info';
         }
 
+        const DEMO_TOKEN_ID = '00000000-0000-0000-0000-000000000000';
+
+        const DEMO_TRANSACTIONS = [
+            { itemName: 'Espresso', imageName: 'coffee', type: 'purchase', amount: -3.50, date: new Date().toISOString(), note: null, resolvedBy: null },
+            { itemName: 'Sparkling water', imageName: 'glass', type: 'purchase', amount: -2.50, date: new Date(Date.now() - 900000).toISOString(), note: null, resolvedBy: null },
+            { itemName: 'IPA Beer', imageName: 'beer', type: 'purchase', amount: -6.00, date: new Date(Date.now() - 3600000).toISOString(), note: null, resolvedBy: null },
+            { itemName: 'Cheese Burger', imageName: 'hamburger', type: 'purchase', amount: -12.00, date: new Date(Date.now() - 7200000).toISOString(), note: 'No onions', resolvedBy: null },
+            { itemName: 'Resolved balance', imageName: null, type: 'resolve', amount: 45.00, date: new Date(Date.now() - 86400000).toISOString(), note: 'Payment received', resolvedBy: null },
+            { itemName: 'House Red Wine', imageName: 'wine', type: 'purchase', amount: -8.00, date: new Date(Date.now() - 87000000).toISOString(), note: null, resolvedBy: { id: '1' } },
+            { itemName: 'Margherita Pizza', imageName: 'pizza', type: 'purchase', amount: -14.00, date: new Date(Date.now() - 87600000).toISOString(), note: null, resolvedBy: { id: '1' } },
+            { itemName: 'Gin & Tonic', imageName: 'gintonic', type: 'purchase', amount: -9.00, date: new Date(Date.now() - 173000000).toISOString(), note: null, resolvedBy: { id: '1' } },
+            { itemName: 'Caesar Salad', imageName: 'fruit', type: 'purchase', amount: -10.00, date: new Date(Date.now() - 173500000).toISOString(), note: null, resolvedBy: { id: '1' } }
+        ];
+
         async function loadTransactions() {
             const urlParams = new URLSearchParams(window.location.search);
             const tokenId = urlParams.get('tokenId');
 
             if (!tokenId) {
                 renderError('No token provided. Please use a valid link to view your transaction history.');
+                return;
+            }
+
+            if (tokenId === DEMO_TOKEN_ID) {
+                renderTransactions(DEMO_TRANSACTIONS, 'USD', true);
                 return;
             }
 
@@ -296,7 +323,7 @@
                 const data = await response.json();
                 const transactions = data.transactions || data;
                 const currency = data.currency || 'USD';
-                renderTransactions(transactions, currency);
+                renderTransactions(transactions, currency, false);
             } catch (error) {
                 console.error('Error loading transactions:', error);
                 renderError('Unable to connect to the server. Please check your internet connection and try again.');

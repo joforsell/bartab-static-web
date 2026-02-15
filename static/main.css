@@ -576,6 +576,35 @@ main {
     font-size: 0.9375rem;
 }
 
+/* Demo banner */
+.demo-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-xl);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+}
+
+.demo-banner__label {
+    flex-shrink: 0;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2em 0.5em;
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    border-radius: 4px;
+}
+
+.demo-banner__text {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
 /* Summary Card */
 .summary-card {
     background-color: var(--color-bg-secondary);
