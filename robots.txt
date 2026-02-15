@@ -1,0 +1,30 @@
+# Bartab - robots.txt
+
+# Allow all standard crawlers
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://bartab.info/sitemap.xml
+
+# AI Crawlers - Allow (change to Disallow to block)
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /

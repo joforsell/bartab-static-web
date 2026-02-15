@@ -1,0 +1,33 @@
+# Bartab
+
+> Bartab is an iOS running tab and point-of-sale (POS) app for venues and retail. Manage open tabs, customer balance, food and drinks, and when they pay. Used by caterers, hostels, event managers, coworking spaces, and more. Replaces pen, paper, and cash register chaos with a simple system.
+
+## About
+
+Bartab helps venue operators and businesses:
+- Track customer tabs and purchases in real-time
+- View complete transaction history with timestamps
+- Send balance update emails to customers
+- Analyze sales with breakdowns by time, weekday, and menu item
+- Track inventory stock with low-stock notifications
+- Generate and send receipts and invoices
+- Customize menus with items, prices, and icons
+
+## Pricing
+
+Free one-week trial, then $5/month.
+
+## Platform
+
+Currently available on iOS via the App Store. Android version coming soon.
+
+## Links
+
+- [Home](/): Main landing page with features overview
+- [Download](/app.html): App Store download page
+- [Terms and Conditions](/termsandconditions.html): Legal terms of service
+- [Privacy Policy](/privacypolicy.html): Privacy and data handling policy
+
+## Contact
+
+Available through the App Store listing or in-app feedback channels.
