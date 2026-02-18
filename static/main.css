@@ -651,6 +651,43 @@ main {
     gap: var(--space-sm);
 }
 
+/* Grouped transactions (same timestamp): summary row, expand details on hover */
+.transaction-group {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.transaction-group__summary {
+    cursor: default;
+}
+
+.transaction-group__details {
+    max-height: 0;
+    overflow: hidden;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    transition: max-height 0.25s ease-out, padding-top 0.2s ease-out;
+}
+
+.transaction-group:hover .transaction-group__details {
+    max-height: 2000px;
+    padding-top: var(--space-sm);
+    transition: max-height 0.35s ease-in, padding-top 0.2s ease-in;
+}
+
+.transaction-group__details .transaction-item--sub {
+    margin-left: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 6px;
+}
+
+.transaction-group__details .transaction-item--sub .transaction-item__meta .transaction-item__running-balance,
+.transaction-group__details .transaction-item--sub .transaction-item__meta .transaction-item__date {
+    display: none;
+}
+
 .transaction-item {
     display: flex;
     align-items: center;

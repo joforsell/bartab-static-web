@@ -187,7 +187,16 @@
                 return;
             }
 
-            // Transactions are already sorted by the backend
+            // Transactions are already sorted by the backend (newest first)
+            // Group by same timestamp
+            const groups = [];
+            for (const t of transactions) {
+                if (groups.length > 0 && groups[groups.length - 1][0].date === t.date) {
+                    groups[groups.length - 1].push(t);
+                } else {
+                    groups.push([t]);
+                }
+            }
 
             const balance = calculateBalance(transactions);
             const balanceClass = balance >= 0 ? 'summary-card__balance--positive' : 'summary-card__balance--negative';
@@ -214,40 +223,85 @@
                 <div class="transaction-list">
             `;
 
-            // Calculate running balance (transactions are newest first)
             let runningBalance = balance;
 
-            for (const transaction of transactions) {
-                const isResolved = transaction.resolvedBy && transaction.resolvedBy.id;
-                const iconPath = getIconPath(transaction.imageName, transaction.type);
-                const resolvedClass = isResolved ? 'transaction-item--resolved' : '';
-                
+            for (const group of groups) {
+                const groupTotal = group.reduce((sum, t) => sum + t.amount, 0);
                 const balanceAfter = runningBalance;
-                runningBalance -= transaction.amount; // Move backwards to previous balance
-                
-                // Use 0 instead of -0 to avoid showing minus sign for zero
+                runningBalance -= groupTotal;
+
                 const balanceValue = Math.abs(balanceAfter) < 0.001 ? 0 : balanceAfter;
                 const formattedRunningBalance = new Intl.NumberFormat(navigator.language, {
                     style: 'currency',
                     currency: currency
                 }).format(balanceValue);
 
-                html += `
-                    <div class="transaction-item ${resolvedClass}">
-                        <div class="transaction-item__icon">
-                            <img src="${iconPath}" alt="${escapeHtml(transaction.itemName)}" onerror="this.src='../static/drink.svg'">
+                if (group.length === 1) {
+                    const t = group[0];
+                    const isResolved = t.resolvedBy && t.resolvedBy.id;
+                    const iconPath = getIconPath(t.imageName, t.type);
+                    const resolvedClass = isResolved ? 'transaction-item--resolved' : '';
+                    html += `
+                        <div class="transaction-item ${resolvedClass}">
+                            <div class="transaction-item__icon">
+                                <img src="${iconPath}" alt="${escapeHtml(t.itemName)}" onerror="this.src='../static/drink.svg'">
+                            </div>
+                            <div class="transaction-item__details">
+                                <div class="transaction-item__name">${escapeHtml(t.itemName)}</div>
+                                ${t.note ? `<div class="transaction-item__note">${escapeHtml(t.note)}</div>` : ''}
+                            </div>
+                            <div class="transaction-item__meta">
+                                <div class="transaction-item__amount">${formatAmount(t.amount, currency)}</div>
+                                <div class="transaction-item__running-balance">${formattedRunningBalance}</div>
+                                <div class="transaction-item__date">${formatDate(t.date)}</div>
+                            </div>
                         </div>
-                        <div class="transaction-item__details">
-                            <div class="transaction-item__name">${escapeHtml(transaction.itemName)}</div>
-                            ${transaction.note ? `<div class="transaction-item__note">${escapeHtml(transaction.note)}</div>` : ''}
+                    `;
+                } else {
+                    const allResolved = group.every(t => t.resolvedBy && t.resolvedBy.id);
+                    const firstIconPath = getIconPath(group[0].imageName, group[0].type);
+                    const resolvedClass = allResolved ? 'transaction-item--resolved' : '';
+                    const itemsLabel = group.length + ' items';
+                    html += `
+                        <div class="transaction-group">
+                            <div class="transaction-group__summary transaction-item ${resolvedClass}" aria-expanded="false">
+                                <div class="transaction-item__icon">
+                                    <img src="${firstIconPath}" alt="" onerror="this.src='../static/drink.svg'">
+                                </div>
+                                <div class="transaction-item__details">
+                                    <div class="transaction-item__name">${escapeHtml(itemsLabel)}</div>
+                                    <div class="transaction-item__note">Hover to see individual items</div>
+                                </div>
+                                <div class="transaction-item__meta">
+                                    <div class="transaction-item__amount">${formatAmount(groupTotal, currency)}</div>
+                                    <div class="transaction-item__running-balance">${formattedRunningBalance}</div>
+                                    <div class="transaction-item__date">${formatDate(group[0].date)}</div>
+                                </div>
+                            </div>
+                            <div class="transaction-group__details">
+                                ${group.map(t => {
+                                    const isResolved = t.resolvedBy && t.resolvedBy.id;
+                                    const iconPath = getIconPath(t.imageName, t.type);
+                                    const subResolvedClass = isResolved ? 'transaction-item--resolved' : '';
+                                    return `
+                                        <div class="transaction-item transaction-item--sub ${subResolvedClass}">
+                                            <div class="transaction-item__icon">
+                                                <img src="${iconPath}" alt="${escapeHtml(t.itemName)}" onerror="this.src='../static/drink.svg'">
+                                            </div>
+                                            <div class="transaction-item__details">
+                                                <div class="transaction-item__name">${escapeHtml(t.itemName)}</div>
+                                                ${t.note ? `<div class="transaction-item__note">${escapeHtml(t.note)}</div>` : ''}
+                                            </div>
+                                            <div class="transaction-item__meta">
+                                                <div class="transaction-item__amount">${formatAmount(t.amount, currency)}</div>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
                         </div>
-                        <div class="transaction-item__meta">
-                            <div class="transaction-item__amount">${formatAmount(transaction.amount, currency)}</div>
-                            <div class="transaction-item__running-balance">${formattedRunningBalance}</div>
-                            <div class="transaction-item__date">${formatDate(transaction.date)}</div>
-                        </div>
-                    </div>
-                `;
+                    `;
+                }
             }
 
             html += '</div>';
@@ -285,10 +339,10 @@
             { itemName: 'Espresso', imageName: 'coffee', type: 'purchase', amount: -3.50, date: new Date().toISOString(), note: null, resolvedBy: null },
             { itemName: 'Sparkling water', imageName: 'glass', type: 'purchase', amount: -2.50, date: new Date(Date.now() - 900000).toISOString(), note: null, resolvedBy: null },
             { itemName: 'IPA Beer', imageName: 'beer', type: 'purchase', amount: -6.00, date: new Date(Date.now() - 3600000).toISOString(), note: null, resolvedBy: null },
-            { itemName: 'Cheese Burger', imageName: 'hamburger', type: 'purchase', amount: -12.00, date: new Date(Date.now() - 7200000).toISOString(), note: null, resolvedBy: null },
+            { itemName: 'Cheese Burger', imageName: 'hamburger', type: 'purchase', amount: -12.00, date: new Date(Date.now() - 3600000).toISOString(), note: 'No onions', resolvedBy: null },
             { itemName: 'Resolved balance', imageName: null, type: 'resolve', amount: 45.00, date: new Date(Date.now() - 86400000).toISOString(), note: null, resolvedBy: null },
             { itemName: 'House Red Wine', imageName: 'wine', type: 'purchase', amount: -8.00, date: new Date(Date.now() - 87000000).toISOString(), note: null, resolvedBy: { id: '1' } },
-            { itemName: 'Margherita Pizza', imageName: 'pizza', type: 'purchase', amount: -14.00, date: new Date(Date.now() - 87600000).toISOString(), note: null, resolvedBy: { id: '1' } },
+            { itemName: 'Margherita Pizza', imageName: 'pizza', type: 'purchase', amount: -14.00, date: new Date(Date.now() - 87000000).toISOString(), note: null, resolvedBy: { id: '1' } },
             { itemName: 'Gin & Tonic', imageName: 'gintonic', type: 'purchase', amount: -9.00, date: new Date(Date.now() - 173000000).toISOString(), note: null, resolvedBy: { id: '1' } },
             { itemName: 'Caesar Salad', imageName: 'fruit', type: 'purchase', amount: -10.00, date: new Date(Date.now() - 173500000).toISOString(), note: null, resolvedBy: { id: '1' } }
         ];
