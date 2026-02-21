@@ -314,6 +314,51 @@ main {
     height: 20px;
 }
 
+/* Stats / Social proof */
+.stats {
+    padding: var(--space-lg) 0;
+}
+
+.stats__title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+    text-align: center;
+}
+
+.stats__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+}
+
+.stats__list li {
+    font-family: var(--font-display);
+}
+
+.stats__list .stats__item--amount {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+@media (min-width: 640px) {
+    .stats__list {
+        font-size: 1rem;
+    }
+    .stats__list .stats__item--amount {
+        font-size: 1.25rem;
+    }
+}
+
 /* Showcase / Screenshots Section */
 .showcase {
     padding: var(--space-lg) 0 var(--space-3xl);

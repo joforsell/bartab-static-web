@@ -82,6 +82,13 @@
             </div>
         </section>
 
+        <section class="stats" id="stats" aria-label="Bartab usage statistics" hidden>
+            <div class="container">
+                <h2 class="stats__title">Processed by Bartab in the last 30 days</h2>
+                <ul class="stats__list" id="stats-list"></ul>
+            </div>
+        </section>
+
         <section class="showcase">
             <div class="showcase__device">
                 <picture>
@@ -205,6 +212,49 @@
             navLinks.classList.toggle('active');
         });
 
+        // Stats / social proof from API
+        (function() {
+            const statsEl = document.getElementById('stats');
+            const listEl = document.getElementById('stats-list');
+            if (!statsEl || !listEl) return;
+
+            fetch('https://api.bartab.info/stats/transactions')
+                .then(function(res) { return res.ok ? res.json() : Promise.reject(); })
+                .then(function(data) {
+                    const count = data.transactionCount;
+                    const usd = data.totalProcessedUSD;
+                    const currencies = data.processedByCurrency && typeof data.processedByCurrency === 'object' ? Object.keys(data.processedByCurrency) : [];
+                    const currencyCount = currencies.length;
+                    const hasCount = count != null && count !== '';
+                    const hasUsd = usd != null && usd !== '';
+                    const hasCurrencies = currencyCount > 0;
+
+                    if (!hasCount && !hasUsd && !hasCurrencies) return;
+
+                    listEl.innerHTML = '';
+
+                    if (hasUsd) {
+                        var li1 = document.createElement('li');
+                        li1.className = 'stats__item--amount';
+                        li1.textContent = '$' + (Math.floor(usd).toLocaleString()) + '+';
+                        listEl.appendChild(li1);
+                    }
+                    if (hasCount) {
+                        var li2 = document.createElement('li');
+                        li2.textContent = 'Over ' + (count.toLocaleString()) + ' transactions';
+                        listEl.appendChild(li2);
+                    }
+                    if (hasCurrencies) {
+                        var li3 = document.createElement('li');
+                        li3.textContent = 'In ' + currencyCount + ' ' + (currencyCount === 1 ? 'currency' : 'currencies');
+                        listEl.appendChild(li3);
+                    }
+                    statsEl.hidden = false;
+                })
+                .catch(function() {
+                    statsEl.style.display = 'none';
+                });
+        })();
     </script>
 </body>
 </html>
