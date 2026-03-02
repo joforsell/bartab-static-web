@@ -163,6 +163,17 @@
             } else {
                 document.getElementById('success-view').classList.remove('hidden');
             }
+
+            // Append PKCE token to Open Bartab links so the app can continue the flow (Supabase uses ?token=...)
+            const pkceToken = urlParams.get('token') || urlParams.get('code') || urlParams.get('pkce_token');
+            const openBartabUrl = 'https://open.bartab.info/app';
+            document.querySelectorAll('a[href="' + openBartabUrl + '"]').forEach(function (link) {
+                if (pkceToken) {
+                    const target = new URL(openBartabUrl);
+                    target.searchParams.set('token', pkceToken);
+                    link.href = target.toString();
+                }
+            });
         }
         
         handleEmailConfirmation();
