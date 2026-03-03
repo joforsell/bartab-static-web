@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FWT1359JT0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FWT1359JT0');
+    </script>
+    <title>Sign in - Bartab</title>
+    <meta name="description" content="Returning you to Bartab.">
+    <link rel="canonical" href="https://bartab.info/auth-callback.html">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" type="image/x-icon" href="static/favicon.png">
+    <meta name="apple-itunes-app" content="app-id=1602993704">
+    
+    <link rel="stylesheet" href="static/main.css">
+    <style>
+        .auth-callback {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl);
+        }
+        .auth-callback__card {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: var(--space-2xl);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .auth-callback__card h1 {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-sm);
+        }
+        .auth-callback__card p {
+            margin-bottom: var(--space-xl);
+            color: var(--color-text-muted);
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav__logo">Bartab</a>
+            <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="app.html" class="nav__link">Download</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="auth-callback">
+            <div class="auth-callback__card">
+                <div id="has-code-view">
+                    <h1>Returning you to Bartab</h1>
+                    <p>If the app doesn’t open automatically, tap the button below.</p>
+                    <a id="openBartabBtn" href="#" class="btn btn--primary">Open Bartab</a>
+                </div>
+                <div id="no-code-view" class="hidden">
+                    <h1>Missing authorization</h1>
+                    <p>This page was opened without a sign-in code. Please try signing in again from the app.</p>
+                    <a href="https://open.bartab.info/app" class="btn btn--primary">Open Bartab</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__links">
+                <a href="termsandconditions.html" class="footer__link">Terms & Conditions</a>
+                <a href="privacypolicy.html" class="footer__link">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var toggle = document.querySelector('.nav__toggle');
+            var navLinks = document.querySelector('.nav__links');
+            if (toggle && navLinks) {
+                toggle.addEventListener('click', function () {
+                    var expanded = toggle.getAttribute('aria-expanded') === 'true';
+                    toggle.setAttribute('aria-expanded', !expanded);
+                    navLinks.classList.toggle('active');
+                });
+            }
+
+            var searchParams = new URLSearchParams(window.location.search);
+            var hashParams = window.location.hash ? new URLSearchParams(window.location.hash.slice(1)) : new URLSearchParams();
+            var code = searchParams.get('code') || hashParams.get('code');
+
+            var targetOrigin = 'https://open.bartab.info';
+            var callbackUrl = targetOrigin + '/auth-callback';
+
+            if (code) {
+                callbackUrl += '?code=' + encodeURIComponent(code);
+                var btn = document.getElementById('openBartabBtn');
+                if (btn) btn.href = callbackUrl;
+
+                // Auto-redirect so universal links can open the app (user gesture not required for location change)
+                setTimeout(function () {
+                    window.location.href = callbackUrl;
+                }, 1500);
+            } else {
+                document.getElementById('has-code-view').classList.add('hidden');
+                document.getElementById('no-code-view').classList.remove('hidden');
+            }
+        })();
+    </script>
+</body>
+</html>
