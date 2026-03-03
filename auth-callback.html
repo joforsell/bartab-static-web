@@ -72,7 +72,7 @@
             <div class="auth-callback__card">
                 <div id="has-code-view">
                     <h1>Returning you to Bartab</h1>
-                    <p>If the app doesn’t open automatically, tap the button below.</p>
+                    <p>Tap the button below to open the app and complete sign-in.</p>
                     <a id="openBartabBtn" href="#" class="btn btn--primary">Open Bartab</a>
                 </div>
                 <div id="no-code-view" class="hidden">
@@ -116,11 +116,6 @@
                 callbackUrl += '?code=' + encodeURIComponent(code);
                 var btn = document.getElementById('openBartabBtn');
                 if (btn) btn.href = callbackUrl;
-
-                // Auto-redirect so universal links can open the app (user gesture not required for location change)
-                setTimeout(function () {
-                    window.location.href = callbackUrl;
-                }, 1500);
             } else {
                 document.getElementById('has-code-view').classList.add('hidden');
                 document.getElementById('no-code-view').classList.remove('hidden');
