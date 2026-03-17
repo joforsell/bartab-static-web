@@ -232,6 +232,36 @@ main {
 }
 
 /* Language switcher */
+.nav__lang-trigger {
+    display: none;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    padding: var(--space-md) 0;
+    cursor: pointer;
+    position: relative;
+}
+.nav__lang-trigger:hover {
+    color: var(--color-text);
+}
+.nav__lang-trigger::after {
+    content: '';
+    display: inline-block;
+    margin-left: var(--space-xs);
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: transform var(--transition-fast);
+}
+.nav__item--lang.expanded .nav__lang-trigger::after {
+    transform: rotate(-135deg);
+}
 .lang-switcher {
     display: flex;
     align-items: center;
@@ -264,13 +294,39 @@ main {
     font-weight: 500;
 }
 @media (max-width: 640px) {
-    .nav__links li:has(.lang-switcher) {
-        border-bottom: 1px solid var(--color-border);
-        padding: var(--space-md) 0;
+    .nav__item--lang {
+        border-bottom: none;
+        padding: 0;
     }
-    .lang-switcher {
+    .nav__lang-trigger {
+        display: block;
+    }
+    .nav__item--lang .lang-switcher__label {
+        display: none;
+    }
+    .nav__item--lang .lang-switcher {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        width: 100%;
+    }
+    .nav__item--lang .lang-switcher__list {
+        display: none;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0;
+        padding: 0 0 var(--space-sm) var(--space-lg);
+        border-bottom: 1px solid var(--color-border);
+    }
+    .nav__item--lang.expanded .lang-switcher__list {
+        display: flex;
+    }
+    .nav__item--lang .lang-switcher__item {
+        border-bottom: none;
+    }
+    .nav__item--lang .lang-switcher__link {
+        display: block;
+        padding: var(--space-sm) 0;
+        font-size: 0.875rem;
     }
 }
 
@@ -484,12 +540,6 @@ main {
 
 .cta p {
     margin-bottom: var(--space-xl);
-}
-
-.cta__price {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    margin-top: var(--space-md);
 }
 
 /* Footer */

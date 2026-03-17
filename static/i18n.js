@@ -94,13 +94,13 @@
         var basePath = isHistory ? '/history' : '';
         var currentPage = isHistory ? 'index.html' : (pathname === '' || pathname === '/' ? 'index.html' : pathname.replace(/^\//, '').split('/').pop() || 'index.html');
 
-        var html = '<div class="lang-switcher"><span class="lang-switcher__label" aria-hidden="true">' + (t('nav.lang') || 'Language') + '</span><ul class="lang-switcher__list">';
+        var html = '<div class="lang-switcher"><span class="lang-switcher__label" aria-hidden="true">' + (t('nav.lang') || 'Language') + '</span><ul id="lang-menu" class="lang-switcher__list" role="menu">';
         SUPPORTED.forEach(function (locale) {
             var url = basePath + '/' + currentPage + (locale === 'en' ? '' : '?lang=' + locale);
             if (basePath === '') url = currentPage + (locale === 'en' ? '' : '?lang=' + locale);
             var label = LABELS[locale] || locale;
             var active = currentLang === locale ? ' lang-switcher__item--active' : '';
-            html += '<li class="lang-switcher__item' + active + '"><a href="' + url + '" class="lang-switcher__link" data-lang="' + locale + '">' + label + '</a></li>';
+            html += '<li class="lang-switcher__item' + active + '" role="none"><a href="' + url + '" class="lang-switcher__link" data-lang="' + locale + '" role="menuitem">' + label + '</a></li>';
         });
         html += '</ul></div>';
         container.innerHTML = html;
@@ -113,6 +113,16 @@
                 }
             });
         });
+
+        var wrap = document.getElementById('lang-switcher-wrap');
+        var trigger = wrap && wrap.querySelector('.nav__lang-trigger');
+        if (trigger) {
+            trigger.addEventListener('click', function () {
+                var expanded = trigger.getAttribute('aria-expanded') === 'true';
+                trigger.setAttribute('aria-expanded', !expanded);
+                wrap.classList.toggle('expanded', !expanded);
+            });
+        }
     }
 
     var script = document.currentScript;
