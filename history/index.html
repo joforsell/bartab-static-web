@@ -35,8 +35,9 @@
                 </svg>
             </button>
             <ul class="nav__links">
-                <li><a href="../index.html" class="nav__link">Home</a></li>
-                <li><a href="../app.html" class="nav__link">Download</a></li>
+                <li><a href="../index.html" class="nav__link" data-i18n="nav.home">Home</a></li>
+                <li><a href="../app.html" class="nav__link" data-i18n="nav.download">Download</a></li>
+                <li id="lang-switcher"></li>
             </ul>
         </nav>
     </header>
@@ -45,14 +46,14 @@
         <section class="history">
             <div class="container">
                 <div class="history__header">
-                    <h1>Transaction history</h1>
-                    <p>Your purchases and balance changes</p>
+                    <h1 data-i18n="history.title">Transaction history</h1>
+                    <p data-i18n="history.subtitle">Your purchases and balance changes</p>
                 </div>
 
                 <div id="content">
                     <div class="loading">
                         <div class="loading__spinner"></div>
-                        <p>Loading transactions...</p>
+                        <p data-i18n="history.loading">Loading transactions...</p>
                     </div>
                 </div>
             </div>
@@ -62,12 +63,13 @@
     <footer class="footer">
         <div class="container">
             <div class="footer__links">
-                <a href="../termsandconditions.html" class="footer__link">Terms & Conditions</a>
-                <a href="../privacypolicy.html" class="footer__link">Privacy Policy</a>
+                <a href="../termsandconditions.html" class="footer__link" data-i18n="footer.terms">Terms & Conditions</a>
+                <a href="../privacypolicy.html" class="footer__link" data-i18n="footer.privacy">Privacy Policy</a>
             </div>
         </div>
     </footer>
 
+    <script src="../static/i18n.js"></script>
     <script>
         // Mobile menu toggle
         const toggle = document.querySelector('.nav__toggle');
@@ -171,19 +173,9 @@
 
         function renderTransactions(transactions, currency, isDemo) {
             const content = document.getElementById('content');
-
+            var tr = (window.__i18n && window.__i18n.t) ? window.__i18n.t.bind(window.__i18n) : function(k, p) { return (p && p.count != null) ? k + ' ' + p.count : k; };
             if (!transactions || transactions.length === 0) {
-                content.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                            </svg>
-                        </div>
-                        <h2>No transactions yet</h2>
-                        <p>Your transaction history will appear here.</p>
-                    </div>
-                `;
+                content.innerHTML = '<div class="empty-state"><div class="empty-state__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div><h2>' + tr('history.empty_title') + '</h2><p>' + tr('history.empty_subtitle') + '</p></div>';
                 return;
             }
 
@@ -206,22 +198,15 @@
                 currency: currency
             }).format(Math.abs(balance));
 
-            const demoBanner = isDemo ? `
-                <div class="demo-banner" role="status" aria-live="polite">
-                    <span class="demo-banner__label">Demo</span>
-                    <span class="demo-banner__text">You're viewing sample transaction history. Use a link from the app to see your real data.</span>
-                </div>
-            ` : '';
+            const demoBanner = isDemo ? '<div class="demo-banner" role="status" aria-live="polite"><span class="demo-banner__label">' + tr('history.demo_label') + '</span><span class="demo-banner__text">' + tr('history.demo_text') + '</span></div>' : '';
 
-            let html = `
-                ${demoBanner}
-                <div class="summary-card">
-                    <div class="summary-card__label">Current Balance</div>
-                    <div class="summary-card__balance ${balanceClass}">${formattedBalance}</div>
-                    <div class="summary-card__count">${transactions.length} transaction${transactions.length !== 1 ? 's' : ''}</div>
-                </div>
-                <div class="transaction-list">
-            `;
+            var txLabel = transactions.length === 1 ? tr('history.transaction') : tr('history.transactions');
+            let html = demoBanner +
+                '<div class="summary-card">' +
+                '<div class="summary-card__label">' + tr('history.current_balance') + '</div>' +
+                '<div class="summary-card__balance ' + balanceClass + '">' + formattedBalance + '</div>' +
+                '<div class="summary-card__count">' + transactions.length + ' ' + txLabel + '</div>' +
+                '</div><div class="transaction-list">';
 
             let runningBalance = balance;
 
@@ -261,7 +246,7 @@
                     const allResolved = group.every(t => t.resolvedBy && t.resolvedBy.id);
                     const firstIconPath = getIconPath(group[0].imageName, group[0].type);
                     const resolvedClass = allResolved ? 'transaction-item--resolved' : '';
-                    const itemsLabel = group.length + ' items';
+                    const itemsLabel = (window.__i18n && window.__i18n.t ? window.__i18n.t('history.items', { count: group.length }) : group.length + ' items');
                     html += `
                         <div class="transaction-group">
                             <div class="transaction-group__summary transaction-item ${resolvedClass}" aria-expanded="false">
@@ -270,7 +255,7 @@
                                 </div>
                                 <div class="transaction-item__details">
                                     <div class="transaction-item__name">${escapeHtml(itemsLabel)}</div>
-                                    <div class="transaction-item__note">Hover to see individual items</div>
+                                    <div class="transaction-item__note">${(window.__i18n && window.__i18n.t ? window.__i18n.t('history.hover_items') : 'Hover to see individual items')}</div>
                                 </div>
                                 <div class="transaction-item__meta">
                                     <div class="transaction-item__amount">${formatAmount(groupTotal, currency)}</div>
@@ -310,13 +295,8 @@
 
         function renderError(message) {
             const content = document.getElementById('content');
-            content.innerHTML = `
-                <div class="error">
-                    <div class="error__icon">⚠</div>
-                    <h2>Unable to load transactions</h2>
-                    <p>${escapeHtml(message)}</p>
-                </div>
-            `;
+            var errTitle = (window.__i18n && window.__i18n.t ? window.__i18n.t('history.error_title') : 'Unable to load transactions');
+            content.innerHTML = '<div class="error"><div class="error__icon">⚠</div><h2>' + errTitle + '</h2><p>' + escapeHtml(message) + '</p></div>';
         }
 
         function escapeHtml(text) {
@@ -352,7 +332,7 @@
             const tokenId = urlParams.get('tokenId');
 
             if (!tokenId) {
-                renderError('No token provided. Please use a valid link to view your transaction history.');
+                renderError((window.__i18n && window.__i18n.t ? window.__i18n.t('history.error_no_token') : 'No token provided. Please use a valid link to view your transaction history.'));
                 return;
             }
 
@@ -367,9 +347,9 @@
                 
                 if (!response.ok) {
                     if (response.status === 404) {
-                        renderError('Transaction history not found. The link may have expired or be invalid.');
+                        renderError((window.__i18n && window.__i18n.t ? window.__i18n.t('history.error_not_found') : 'Transaction history not found. The link may have expired or be invalid.'));
                     } else {
-                        renderError(`Server error: ${response.status}`);
+                        renderError((window.__i18n && window.__i18n.t ? window.__i18n.t('history.error_server', { status: response.status }) : 'Server error: ' + response.status));
                     }
                     return;
                 }
@@ -380,11 +360,12 @@
                 renderTransactions(transactions, currency, false);
             } catch (error) {
                 console.error('Error loading transactions:', error);
-                renderError('Unable to connect to the server. Please check your internet connection and try again.');
+                renderError((window.__i18n && window.__i18n.t ? window.__i18n.t('history.error_connection') : 'Unable to connect to the server. Please check your internet connection and try again.'));
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadTransactions);
+        var i18nReady = window.__i18n && window.__i18n.ready ? window.__i18n.ready : Promise.resolve();
+        document.addEventListener('DOMContentLoaded', function() { i18nReady.then(loadTransactions); });
     </script>
 </body>
 </html>

@@ -53,7 +53,7 @@
     <header class="header">
         <nav class="nav">
             <a href="index.html" class="nav__logo">Bartab</a>
-            <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+            <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" data-i18n-attr="aria-label:nav.toggle">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -61,8 +61,9 @@
                 </svg>
             </button>
             <ul class="nav__links">
-                <li><a href="index.html" class="nav__link nav__link--active">Home</a></li>
-                <li><a href="app.html" class="nav__link">Download</a></li>
+                <li><a href="index.html" class="nav__link nav__link--active" data-i18n="nav.home">Home</a></li>
+                <li><a href="app.html" class="nav__link" data-i18n="nav.download">Download</a></li>
+                <li id="lang-switcher"></li>
             </ul>
         </nav>
     </header>
@@ -71,20 +72,20 @@
         <section class="hero">
             <div class="container">
                 <img src="static/app-icon.svg" alt="Bartab" class="hero__icon">
-                <span class="hero__tagline">Events, regulars, running tabs</span>
-                <h1>Running tabs,<br>without the spreadsheet</h1>
-                <p>Are you running events where guests have running tabs? Have an establishment with regulars? Tired of managing everyone's balance in a spreadsheet? Then Bartab is the app for you.</p>
+                <span class="hero__tagline" data-i18n="hero.tagline">Events, regulars, running tabs</span>
+                <h1 data-i18n="hero.title">Running tabs,<br>without the spreadsheet</h1>
+                <p data-i18n="hero.subtitle">Are you running events where guests have running tabs? Have an establishment with regulars? Tired of managing everyone's balance in a spreadsheet? Then Bartab is the app for you.</p>
                 <a href="https://apps.apple.com/us/app/bartab/id1602993704" class="btn btn--primary">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                    Download for iOS
+                    <span data-i18n="hero.cta_ios">Download for iOS</span>
                 </a>
-                <p class="cta__price">Free trial, then $5/month</p>
+                <p class="cta__price" data-i18n="hero.price">Free trial, then $5/month</p>
             </div>
         </section>
 
         <section class="stats" id="stats" aria-label="Bartab usage statistics" hidden>
             <div class="container">
-                <h2 class="stats__title">Processed by Bartab in the last 30 days</h2>
+                <h2 class="stats__title" data-i18n="stats.title">Processed by Bartab in the last 30 days</h2>
                 <ul class="stats__list" id="stats-list"></ul>
             </div>
         </section>
@@ -93,7 +94,7 @@
             <div class="showcase__device">
                 <picture>
                     <source srcset="static/preview-520.webp 520w, static/preview-1040.webp 1040w" sizes="(max-width: 640px) 100vw, 520px" type="image/webp">
-                    <img src="static/preview-1040.png" srcset="static/preview-520.png 520w, static/preview-1040.png 1040w" sizes="(max-width: 640px) 100vw, 520px" alt="Bartab on iPhone and iPad" class="showcase__screen" width="1040" height="711" loading="lazy">
+                    <img src="static/preview-1040.png" srcset="static/preview-520.png 520w, static/preview-1040.png 1040w" sizes="(max-width: 640px) 100vw, 520px" alt="Bartab on iPhone and iPad" class="showcase__screen" data-i18n-attr="alt:showcase.alt" width="1040" height="711" loading="lazy">
                 </picture>
             </div>
         </section>
@@ -108,8 +109,8 @@
                                 <circle cx="12" cy="12" r="3"/>
                             </svg>
                         </div>
-                        <h3>Menu &amp; inventory</h3>
-                        <p>Set up your menu with items and prices, and track inventory with low-stock alerts.</p>
+                        <h3 data-i18n="feature.menu.title">Menu &amp; inventory</h3>
+                        <p data-i18n="feature.menu.desc">Set up your menu with items and prices, and track inventory with low-stock alerts.</p>
                     </div>
                     <div class="feature">
                         <div class="feature__icon">
@@ -118,8 +119,8 @@
                                 <path d="M9 14l2 2 4-4"/>
                             </svg>
                         </div>
-                        <h3>Update balances</h3>
-                        <p>Update a guest's balance with each purchase—individually or for multiple guests at once.</p>
+                        <h3 data-i18n="feature.balances.title">Update balances</h3>
+                        <p data-i18n="feature.balances.desc">Update a guest's balance with each purchase—individually or for multiple guests at once.</p>
                     </div>
                     <div class="feature">
                         <div class="feature__icon">
@@ -129,8 +130,8 @@
                                 <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
                             </svg>
                         </div>
-                        <h3>Manage guests</h3>
-                        <p>Manage your list of guests, with manual adjustments for special expenses or paying off tabs.</p>
+                        <h3 data-i18n="feature.guests.title">Manage guests</h3>
+                        <p data-i18n="feature.guests.desc">Manage your list of guests, with manual adjustments for special expenses or paying off tabs.</p>
                     </div>
                     <div class="feature">
                         <div class="feature__icon">
@@ -138,8 +139,8 @@
                                 <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
                         </div>
-                        <h3>Emails &amp; receipts</h3>
-                        <p>Send balance notification emails to guests, and generate professional receipts and invoices in PDF format.</p>
+                        <h3 data-i18n="feature.emails.title">Emails &amp; receipts</h3>
+                        <p data-i18n="feature.emails.desc">Send balance notification emails to guests, and generate professional receipts and invoices in PDF format.</p>
                     </div>
                     <div class="feature">
                         <div class="feature__icon">
@@ -147,8 +148,8 @@
                                 <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
-                        <h3>Sales tax</h3>
-                        <p>Configure sales tax—set whether your prices are tax-inclusive or exclusive, with tax breakdowns on all documents.</p>
+                        <h3 data-i18n="feature.tax.title">Sales tax</h3>
+                        <p data-i18n="feature.tax.desc">Configure sales tax—set whether your prices are tax-inclusive or exclusive, with tax breakdowns on all documents.</p>
                     </div>
                     <div class="feature">
                         <div class="feature__icon">
@@ -156,8 +157,8 @@
                                 <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                             </svg>
                         </div>
-                        <h3>Sales statistics</h3>
-                        <p>Track sales statistics by date, weekday, and item.</p>
+                        <h3 data-i18n="feature.stats.title">Sales statistics</h3>
+                        <p data-i18n="feature.stats.desc">Track sales statistics by date, weekday, and item.</p>
                     </div>
                     <div class="feature">
                         <div class="feature__icon">
@@ -165,8 +166,8 @@
                                 <path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
                             </svg>
                         </div>
-                        <h3>iPhone, iPad &amp; offline</h3>
-                        <p>Works seamlessly across iPhone and iPad, synced in real time across all your devices—and keeps working even with a poor connection or completely offline.</p>
+                        <h3 data-i18n="feature.offline.title">iPhone, iPad &amp; offline</h3>
+                        <p data-i18n="feature.offline.desc">Works seamlessly across iPhone and iPad, synced in real time across all your devices—and keeps working even with a poor connection or completely offline.</p>
                     </div>
                     <div class="feature">
                         <div class="feature__icon">
@@ -174,8 +175,8 @@
                                 <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                             </svg>
                         </div>
-                        <h3>Shape the future</h3>
-                        <p>Vote on features, help localize the app, and chat directly with the developer through the in-app chat.</p>
+                        <h3 data-i18n="feature.future.title">Shape the future</h3>
+                        <p data-i18n="feature.future.desc">Vote on features, help localize the app, and chat directly with the developer through the in-app chat.</p>
                     </div>
                 </div>
             </div>
@@ -183,11 +184,9 @@
 
         <section class="cta">
             <div class="container">
-                <h2>Ready to ditch the spreadsheet?</h2>
-                <p>Try Bartab free for one week. No commitment.</p>
-                <a href="https://apps.apple.com/us/app/bartab/id1602993704" class="btn btn--primary">
-                    Get started
-                </a>
+                <h2 data-i18n="cta.title">Ready to ditch the spreadsheet?</h2>
+                <p data-i18n="cta.subtitle">Try Bartab free for one week. No commitment.</p>
+                <a href="https://apps.apple.com/us/app/bartab/id1602993704" class="btn btn--primary" data-i18n="cta.button">Get started</a>
             </div>
         </section>
     </main>
@@ -195,12 +194,13 @@
     <footer class="footer">
         <div class="container">
             <div class="footer__links">
-                <a href="termsandconditions.html" class="footer__link">Terms & Conditions</a>
-                <a href="privacypolicy.html" class="footer__link">Privacy Policy</a>
+                <a href="termsandconditions.html" class="footer__link" data-i18n="footer.terms">Terms & Conditions</a>
+                <a href="privacypolicy.html" class="footer__link" data-i18n="footer.privacy">Privacy Policy</a>
             </div>
         </div>
     </footer>
 
+    <script src="static/i18n.js"></script>
     <script>
         // Mobile menu toggle
         const toggle = document.querySelector('.nav__toggle');
@@ -218,8 +218,10 @@
             const listEl = document.getElementById('stats-list');
             if (!statsEl || !listEl) return;
 
+            var i18nReady = window.__i18n && window.__i18n.ready ? window.__i18n.ready : Promise.resolve();
             fetch('https://api.bartab.info/stats/transactions')
                 .then(function(res) { return res.ok ? res.json() : Promise.reject(); })
+                .then(function(data) { return i18nReady.then(function() { return data; }); })
                 .then(function(data) {
                     const count = data.transactionCount;
                     const usd = data.totalProcessedUSD;
@@ -232,6 +234,7 @@
                     if (!hasCount && !hasUsd && !hasCurrencies) return;
 
                     listEl.innerHTML = '';
+                    var t = window.__i18n && window.__i18n.t ? window.__i18n.t.bind(window.__i18n) : function(k, p) { return (p && p.count != null) ? (k === 'stats.over' ? 'Over ' + p.count + ' transactions' : 'In ' + p.count + ' currencies') : k; };
 
                     if (hasUsd) {
                         var li1 = document.createElement('li');
@@ -241,12 +244,12 @@
                     }
                     if (hasCount) {
                         var li2 = document.createElement('li');
-                        li2.textContent = 'Over ' + (count.toLocaleString()) + ' transactions';
+                        li2.textContent = t('stats.over', { count: count.toLocaleString() });
                         listEl.appendChild(li2);
                     }
                     if (hasCurrencies) {
                         var li3 = document.createElement('li');
-                        li3.textContent = 'In ' + currencyCount + ' ' + (currencyCount === 1 ? 'currency' : 'currencies');
+                        li3.textContent = t('stats.in_currencies', { count: currencyCount });
                         listEl.appendChild(li3);
                     }
                     statsEl.hidden = false;

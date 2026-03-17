@@ -94,8 +94,9 @@
                 </svg>
             </button>
             <ul class="nav__links">
-                <li><a href="index.html" class="nav__link">Home</a></li>
-                <li><a href="app.html" class="nav__link">Download</a></li>
+                <li><a href="index.html" class="nav__link" data-i18n="nav.home">Home</a></li>
+                <li><a href="app.html" class="nav__link" data-i18n="nav.download">Download</a></li>
+                <li id="lang-switcher"></li>
             </ul>
         </nav>
     </header>
@@ -110,10 +111,10 @@
                     </svg>
                 </div>
                 
-                <h1>Email confirmed</h1>
-                <p>Your email has been verified. You can now sign in to your Bartab account.</p>
+                <h1 data-i18n="email_confirm.success_title">Email confirmed</h1>
+                <p id="success-message" data-i18n="email_confirm.success_text">Your email has been verified. You can now sign in to your Bartab account.</p>
                 
-                <a href="https://open.bartab.info/app" class="btn btn--primary">Open Bartab</a>
+                <a href="https://open.bartab.info/app" class="btn btn--primary" data-i18n="email_confirm.open_app">Open Bartab</a>
             </div>
             
             <!-- Error state -->
@@ -125,10 +126,10 @@
                     </svg>
                 </div>
                 
-                <h1>Link expired</h1>
-                <p>This confirmation link has expired. Please request a new confirmation email from the app.</p>
+                <h1 data-i18n="email_confirm.error_title">Link expired</h1>
+                <p data-i18n="email_confirm.error_text">This confirmation link has expired. Please request a new confirmation email from the app.</p>
                 
-                <a href="https://open.bartab.info/app" class="btn btn--primary">Open Bartab</a>
+                <a href="https://open.bartab.info/app" class="btn btn--primary" data-i18n="email_confirm.open_app">Open Bartab</a>
             </div>
         </section>
     </main>
@@ -136,12 +137,13 @@
     <footer class="footer">
         <div class="container">
             <div class="footer__links">
-                <a href="termsandconditions.html" class="footer__link">Terms & Conditions</a>
-                <a href="privacypolicy.html" class="footer__link">Privacy Policy</a>
+                <a href="termsandconditions.html" class="footer__link" data-i18n="footer.terms">Terms & Conditions</a>
+                <a href="privacypolicy.html" class="footer__link" data-i18n="footer.privacy">Privacy Policy</a>
             </div>
         </div>
     </footer>
 
+    <script src="static/i18n.js"></script>
     <script>
         // Mobile menu toggle
         const toggle = document.querySelector('.nav__toggle');
