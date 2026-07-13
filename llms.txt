@@ -15,7 +15,7 @@ Bartab helps venue operators and businesses:
 
 ## Pricing
 
-Freemium — free to try, with optional paid features.
+Freemium — all features free; the free plan has a monthly cap on transactions, and paid plans lift that cap.
 
 ## Platform
 
