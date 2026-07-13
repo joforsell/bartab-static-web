@@ -123,10 +123,24 @@
         var wrap = document.getElementById('lang-switcher-wrap');
         var trigger = wrap && wrap.querySelector('.nav__lang-trigger');
         if (trigger) {
-            trigger.addEventListener('click', function () {
+            trigger.addEventListener('click', function (e) {
+                e.stopPropagation();
                 var expanded = trigger.getAttribute('aria-expanded') === 'true';
                 trigger.setAttribute('aria-expanded', !expanded);
                 wrap.classList.toggle('expanded', !expanded);
+            });
+            document.addEventListener('click', function (e) {
+                if (!wrap.contains(e.target)) {
+                    wrap.classList.remove('expanded');
+                    trigger.setAttribute('aria-expanded', 'false');
+                }
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && wrap.classList.contains('expanded')) {
+                    wrap.classList.remove('expanded');
+                    trigger.setAttribute('aria-expanded', 'false');
+                    trigger.focus();
+                }
             });
         }
     }
