@@ -1,10 +1,10 @@
 /**
  * Client-side i18n for Bartab static site.
  * Usage: data-i18n="key" on elements to replace textContent; data-i18n-attr="title:key" for attributes.
- * Language: ?lang= or localStorage 'bartab-lang' or navigator.language. Supported: en, fr, de, ja, zh-CN, es.
+ * Language: ?lang= or localStorage 'bartab-lang' or navigator.language. Supported: en, fr, de, ja, zh-CN, es, sv, pt-BR, pt-PT.
  */
 (function () {
-    var SUPPORTED = ['en', 'fr', 'de', 'ja', 'zh-CN', 'es'];
+    var SUPPORTED = ['en', 'fr', 'de', 'ja', 'zh-CN', 'es', 'sv', 'pt-BR', 'pt-PT'];
     var STORAGE_KEY = 'bartab-lang';
     var BASE = 'static/translations/';
 
@@ -21,6 +21,9 @@
         if (browser.startsWith('de')) return 'de';
         if (browser.startsWith('fr')) return 'fr';
         if (browser.startsWith('es')) return 'es';
+        if (browser.startsWith('sv')) return 'sv';
+        if (browser.startsWith('pt-br')) return 'pt-BR';
+        if (browser.startsWith('pt')) return 'pt-PT';
         return 'en';
     }
 
@@ -85,7 +88,10 @@
         de: 'Deutsch',
         ja: '日本語',
         'zh-CN': '简体中文',
-        es: 'Español'
+        es: 'Español',
+        sv: 'Svenska',
+        'pt-BR': 'Português (Brasil)',
+        'pt-PT': 'Português (Portugal)'
     };
 
     function renderLangSwitcher(container) {
