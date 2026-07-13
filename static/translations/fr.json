@@ -10,7 +10,7 @@
   "hero.title": "Ardoises,<br>sans tableur",
   "hero.subtitle": "Vous gérez des événements avec des ardoises ? Un établissement avec des habitués ? Vous en avez assez des tableurs pour suivre les soldes ? Bartab est fait pour vous.",
   "hero.cta_ios": "Télécharger pour iOS",
-  "hero.price": "Essai gratuit, puis 5 €/mois",
+  "hero.price": "Essayez gratuitement",
 
   "stats.title": "Traité par Bartab ces 30 derniers jours",
   "stats.over": "Plus de {count} transactions",
@@ -41,11 +41,11 @@
   "feature.future.desc": "Votez pour les fonctionnalités, aidez à traduire l’app et discutez avec le développeur dans le chat intégré.",
 
   "cta.title": "Prêt à abandonner le tableur ?",
-  "cta.subtitle": "Essayez Bartab gratuitement pendant une semaine. Sans engagement.",
+  "cta.subtitle": "Essayez Bartab gratuitement. Sans engagement.",
   "cta.button": "Commencer",
 
   "app.title": "Télécharger Bartab",
-  "app.subtitle": "Ardoise et caisse dans une seule app—nourriture, boissons, solde, ardoises. Essai gratuit d’une semaine.",
+  "app.subtitle": "Ardoise et caisse dans une seule app—nourriture, boissons, solde, ardoises. Essayez-la gratuitement.",
   "app.cta_ios": "Télécharger pour iOS",
 
   "history.title": "Historique des transactions",

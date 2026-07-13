@@ -10,7 +10,7 @@
   "hero.title": "Offene Rechnungen,<br>ohne Tabellen",
   "hero.subtitle": "Veranstalten Sie Events mit offenen Rechnungen? Haben Sie Stammgäste? Keine Lust mehr auf Tabellen für die Salden? Dann ist Bartab die richtige App für Sie.",
   "hero.cta_ios": "Für iOS herunterladen",
-  "hero.price": "Kostenlose Testversion, danach 5 €/Monat",
+  "hero.price": "Kostenlos ausprobieren",
 
   "stats.title": "Von Bartab in den letzten 30 Tagen verarbeitet",
   "stats.over": "Über {count} Transaktionen",
@@ -41,11 +41,11 @@
   "feature.future.desc": "Stimmen Sie über Funktionen ab, helfen Sie bei der Übersetzung und chatten Sie mit dem Entwickler im App-Chat.",
 
   "cta.title": "Bereit, die Tabellen hinter sich zu lassen?",
-  "cta.subtitle": "Bartab eine Woche kostenlos testen. Unverbindlich.",
+  "cta.subtitle": "Bartab kostenlos ausprobieren. Unverbindlich.",
   "cta.button": "Jetzt starten",
 
   "app.title": "Bartab herunterladen",
-  "app.subtitle": "Offene Rechnung und Kasse in einer App—Essen, Getränke, Saldo. Eine Woche kostenlos testen.",
+  "app.subtitle": "Offene Rechnung und Kasse in einer App—Essen, Getränke, Saldo. Kostenlos ausprobieren.",
   "app.cta_ios": "Für iOS herunterladen",
 
   "history.title": "Transaktionsverlauf",

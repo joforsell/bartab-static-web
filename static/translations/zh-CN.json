@@ -10,7 +10,7 @@
   "hero.title": "挂账管理，<br>告别表格",
   "hero.subtitle": "您是否在办有客人挂账的活动？是否有熟客的场所？厌倦了用表格管理每个人的余额？Bartab 适合您。",
   "hero.cta_ios": "下载 iOS 版",
-  "hero.price": "免费试用，随后 $5/月",
+  "hero.price": "免费试用",
 
   "stats.title": "过去 30 天由 Bartab 处理",
   "stats.over": "超过 {count} 笔交易",
@@ -41,11 +41,11 @@
   "feature.future.desc": "投票决定新功能、参与应用本地化，并通过应用内聊天直接与开发者交流。",
 
   "cta.title": "准备好告别表格了吗？",
-  "cta.subtitle": "免费试用 Bartab 一周，无需承诺。",
+  "cta.subtitle": "免费试用 Bartab，无需承诺。",
   "cta.button": "开始使用",
 
   "app.title": "下载 Bartab",
-  "app.subtitle": "挂账与收银一体——餐饮、余额、挂账。免费试用一周。",
+  "app.subtitle": "挂账与收银一体——餐饮、余额、挂账。免费试用。",
   "app.cta_ios": "下载 iOS 版",
 
   "history.title": "交易记录",

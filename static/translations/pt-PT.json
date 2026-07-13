@@ -10,7 +10,7 @@
   "hero.title": "Contas abertas,<br>sem folha de cálculo",
   "hero.subtitle": "Organiza eventos em que os convidados têm conta aberta? Tem um estabelecimento com clientes habituais? Farto de gerir os saldos numa folha de cálculo? Então o Bartab é a aplicação para si.",
   "hero.cta_ios": "Transferir para iOS",
-  "hero.price": "Teste gratuito, depois 5 USD/mês",
+  "hero.price": "Grátis para experimentar",
 
   "stats.title": "Processado pelo Bartab nos últimos 30 dias",
   "stats.over": "Mais de {count} transações",
@@ -41,11 +41,11 @@
   "feature.future.desc": "Vote em funcionalidades, ajude a traduzir a aplicação e converse diretamente com o programador através do chat integrado.",
 
   "cta.title": "Pronto para deixar a folha de cálculo?",
-  "cta.subtitle": "Experimente o Bartab gratuitamente durante uma semana. Sem compromisso.",
+  "cta.subtitle": "Experimente o Bartab gratuitamente. Sem compromisso.",
   "cta.button": "Começar",
 
   "app.title": "Transferir o Bartab",
-  "app.subtitle": "Conta aberta e POS numa só aplicação — comida, bebidas, saldo, contas em aberto. Grátis para experimentar durante uma semana.",
+  "app.subtitle": "Conta aberta e POS numa só aplicação — comida, bebidas, saldo, contas em aberto. Experimente gratuitamente.",
   "app.cta_ios": "Transferir para iOS",
 
   "history.title": "Histórico de transações",

@@ -10,7 +10,7 @@
   "hero.title": "Öppna notor,<br>utan kalkylark",
   "hero.subtitle": "Arrangerar du evenemang där gästerna har öppna notor? Har du ett ställe med stammisar? Trött på att hålla reda på allas saldo i ett kalkylark? Då är Bartab appen för dig.",
   "hero.cta_ios": "Ladda ner för iOS",
-  "hero.price": "Gratis provperiod, sedan 5 USD/mån",
+  "hero.price": "Prova gratis",
 
   "stats.title": "Hanterat av Bartab de senaste 30 dagarna",
   "stats.over": "Över {count} transaktioner",
@@ -41,11 +41,11 @@
   "feature.future.desc": "Rösta på funktioner, hjälp till att översätta appen och chatta direkt med utvecklaren via appens inbyggda chatt.",
 
   "cta.title": "Redo att slänga kalkylarket?",
-  "cta.subtitle": "Prova Bartab gratis i en vecka. Inga förpliktelser.",
+  "cta.subtitle": "Prova Bartab gratis. Inga förpliktelser.",
   "cta.button": "Kom igång",
 
   "app.title": "Ladda ner Bartab",
-  "app.subtitle": "Öppen nota och kassa i en och samma app – mat, dryck, saldo, öppna notor. Gratis att prova i en vecka.",
+  "app.subtitle": "Öppen nota och kassa i en och samma app – mat, dryck, saldo, öppna notor. Prova gratis.",
   "app.cta_ios": "Ladda ner för iOS",
 
   "history.title": "Transaktionshistorik",

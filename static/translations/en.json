@@ -10,7 +10,7 @@
   "hero.title": "Running tabs,<br>without the spreadsheet",
   "hero.subtitle": "Are you running events where guests have running tabs? Have an establishment with regulars? Tired of managing everyone's balance in a spreadsheet? Then Bartab is the app for you.",
   "hero.cta_ios": "Download for iOS",
-  "hero.price": "Free trial, then $5/month",
+  "hero.price": "Free to try",
 
   "stats.title": "Processed by Bartab in the last 30 days",
   "stats.over": "Over {count} transactions",
@@ -41,11 +41,11 @@
   "feature.future.desc": "Vote on features, help localize the app, and chat directly with the developer through the in-app chat.",
 
   "cta.title": "Ready to ditch the spreadsheet?",
-  "cta.subtitle": "Try Bartab free for one week. No commitment.",
+  "cta.subtitle": "Try Bartab for free. No commitment.",
   "cta.button": "Get started",
 
   "app.title": "Download Bartab",
-  "app.subtitle": "Running tab and POS in one app—food, drinks, balance, open tabs. Free to try for one week.",
+  "app.subtitle": "Running tab and POS in one app—food, drinks, balance, open tabs. Try it out for free.",
   "app.cta_ios": "Download for iOS",
 
   "history.title": "Transaction history",

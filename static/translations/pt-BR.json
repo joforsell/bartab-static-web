@@ -10,7 +10,7 @@
   "hero.title": "Contas abertas,<br>sem planilha",
   "hero.subtitle": "Organiza eventos em que os convidados têm conta aberta? Tem um estabelecimento com clientes fixos? Cansado de controlar o saldo de todo mundo numa planilha? Então o Bartab é o app pra você.",
   "hero.cta_ios": "Baixar para iOS",
-  "hero.price": "Teste grátis, depois US$ 5/mês",
+  "hero.price": "Grátis para experimentar",
 
   "stats.title": "Processado pelo Bartab nos últimos 30 dias",
   "stats.over": "Mais de {count} transações",
@@ -41,11 +41,11 @@
   "feature.future.desc": "Vote em recursos, ajude a traduzir o app e converse direto com o desenvolvedor pelo chat dentro do app.",
 
   "cta.title": "Pronto pra largar a planilha?",
-  "cta.subtitle": "Teste o Bartab grátis por uma semana. Sem compromisso.",
+  "cta.subtitle": "Experimente o Bartab grátis. Sem compromisso.",
   "cta.button": "Começar",
 
   "app.title": "Baixar Bartab",
-  "app.subtitle": "Conta aberta e PDV num só app — comida, bebida, saldo, contas em aberto. Teste grátis por uma semana.",
+  "app.subtitle": "Conta aberta e PDV num só app — comida, bebida, saldo, contas em aberto. Experimente grátis.",
   "app.cta_ios": "Baixar para iOS",
 
   "history.title": "Histórico de transações",
